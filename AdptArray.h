@@ -3,7 +3,6 @@
 typedef struct AdptArray_* PAdptArray;
 typedef enum  {FAIL = 0, SUCCESS=1} Result;
 typedef void* PElement;
-
 typedef void(*DEL_FUNC)(PElement);
 typedef PElement(*COPY_FUNC)(PElement);
 typedef void(*PRINT_FUNC)(PElement);
