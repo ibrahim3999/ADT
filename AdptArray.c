@@ -55,6 +55,7 @@ void PrintDB(PAdptArray PA) {
         }
     }
 }
+
 PElement GetAdptArrayAt(PAdptArray PA, int index) {
     if (index < 0 || index >= PA->size) {
         return NULL;
@@ -66,11 +67,12 @@ PElement GetAdptArrayAt(PAdptArray PA, int index) {
 
     return PA->copy(PA->array[index]);
 }
+
 void DeleteAdptArray(PAdptArray PA)
 {
     if(PA==NULL)
     {
-        retrurn NULL;
+        return;
     }
     free(PA->array);
     free(PA);
@@ -101,7 +103,6 @@ Result SetAdptArrayAt(PAdptArray PA, int index, PElement element) {
    
     return SUCCESS;
 }
-
 
 /**
 
