@@ -15,8 +15,6 @@ int main() {
 
 	pbook b1 = creat_book("harry Potter",12345) ;
 	pbook b2= creat_book("C intro", 45678) ;
-	//print_book(b1);
-	//print_book(b2);
 
 	PAdptArray mybooks = CreateAdptArray(copy_book,delete_book,print_book);
 	SetAdptArrayAt(mybooks,3,b1);
@@ -25,9 +23,11 @@ int main() {
 	printf("the size is %d\n",GetAdptArraySize(mybooks));  //should print 6
 	
 	pbook b = GetAdptArrayAt(mybooks,4); // should return null;
+	
 	assert(b==NULL); // doesn't fail
 	b = GetAdptArrayAt(mybooks,3);
 	printf("the book is %s\n",b->name); //should print "Harry Potter"
+	
 	PrintDB(mybooks);
 
 	pperson p1 = creat_person("Harry","Potter", 934);
@@ -47,6 +47,6 @@ int main() {
 	delete_book(b);
 	delete_person(p1);
 	delete_person(p2);
-	
+
 	return 0;
 }

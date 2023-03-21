@@ -56,16 +56,22 @@ void PrintDB(PAdptArray PA) {
     }
 }
 
+
 PElement GetAdptArrayAt(PAdptArray PA, int index) {
-    if (index < 0 || index >= PA->size) {
-        return NULL;
-    }
-    if(PA->array[index]==NULL)
-    {
+     if (index < 0 || index >= PA->size) {
+    // index out of range
         return NULL;
     }
 
-    return PA->copy(PA->array[index]);
+    PElement* element = PA->array[index];
+    printf("Yes\n");
+    if (element == NULL) {
+    // null pointer found
+        return NULL;
+    }
+    
+    // assume copy function correctly manages memory allocation and deallocation
+    return PA->copy(element);
 }
 
 void DeleteAdptArray(PAdptArray PA)
@@ -74,10 +80,18 @@ void DeleteAdptArray(PAdptArray PA)
     {
         return;
     }
+    for (int i = 0; i < PA->size; i++) 
+    {
+        if (PA->array[i] != NULL) 
+        {
+            PA->del(PA->array[i]);
+        }
+    }
     free(PA->array);
     free(PA);
 }
 Result SetAdptArrayAt(PAdptArray PA, int index, PElement element) {
+    PElement p;
     if (index < 0 ) {
         return FAIL;
     }
@@ -85,22 +99,29 @@ Result SetAdptArrayAt(PAdptArray PA, int index, PElement element) {
         printf("\n");
         // Need to reallocate the array
         int newCapacity = index +1; //  index +1
+        if(newCapacity >PA->size)
+        {
         PElement* newArray = (PElement*)realloc(PA->array, newCapacity * sizeof(PElement));
         if (newArray == NULL) {
-           // free(newArray);
+            free(newArray);
             return FAIL;
         }
 
         PA->array = newArray;
+   
+        for (int i = PA->size; i < newCapacity; i++) {
+            PA->array[i] = NULL;
+        }
+
         PA->size = newCapacity;
+        }
+        
         //free(newArray);
     }
-    if(PA->array[index]!=NULL)
-    {
-        PA->del(PA->array[index]);// delete & free
-    }
-    PA->array[index] = PA->copy(element);
-   
+    
+    p = PA->copy(element);
+    PA->array[index]=PA->copy(p);
+   // PA->del(p);
     return SUCCESS;
 }
 
