@@ -10,7 +10,7 @@ Person.c contains functions that define a person data type, including functions 
 The code makes use of pointers, dynamic memory allocation, and function pointers to provide generic and flexible data structures and data types.
 
 ## to usage:
-` git clone url
-` make clean 
-` make run
-` to run memory test --> make mem_test
+- git clone url
+- make clean 
+- make run
+- to run memory test --> make mem_test
